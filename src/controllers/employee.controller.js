@@ -1,5 +1,7 @@
 'use strict';
+// import  model
 const Employee = require('../models/employee.model');
+// show all employers
 exports.findAll = function(req, res) {
 Employee.findAll(function(err, employee) {
   console.log('controller')
@@ -9,6 +11,8 @@ Employee.findAll(function(err, employee) {
   res.send(employee);
 });
 };
+
+// create /add employee
 exports.create = function(req, res) {
 const new_employee = new Employee(req.body);
 //handles null error
@@ -22,6 +26,8 @@ Employee.create(new_employee, function(err, employee) {
 });
 }
 };
+
+// view single employee
 exports.findById = function(req, res) {
 Employee.findById(req.params.id, function(err, employee) {
   if (err)
@@ -29,6 +35,8 @@ Employee.findById(req.params.id, function(err, employee) {
   res.json(employee);
 });
 };
+
+// update employee
 exports.update = function(req, res) {
   if(req.body.constructor === Object && Object.keys(req.body).length === 0){
     res.status(400).send({ error:true, message: 'Please provide all required field' });
@@ -40,6 +48,7 @@ exports.update = function(req, res) {
 });
 }
 };
+// delete employee
 exports.delete = function(req, res) {
 Employee.delete( req.params.id, function(err, employee) {
   if (err)
