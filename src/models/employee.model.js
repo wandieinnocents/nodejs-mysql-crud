@@ -13,6 +13,8 @@ var Employee = function(employee){
   this.created_at     = new Date();
   this.updated_at     = new Date();
 };
+
+// add employee
 Employee.create = function (newEmp, result) {
 dbConn.query("INSERT INTO employees set ?", newEmp, function (err, res) {
 if(err) {
@@ -25,6 +27,8 @@ else{
 }
 });
 };
+
+// view single employee
 Employee.findById = function (id, result) {
 dbConn.query("Select * from employees where id = ? ", id, function (err, res) {
 if(err) {
@@ -36,6 +40,8 @@ else{
 }
 });
 };
+
+// get all employees
 Employee.findAll = function (result) {
 dbConn.query("Select * from employees", function (err, res) {
 if(err) {
@@ -48,6 +54,8 @@ else{
 }
 });
 };
+
+// update employee
 Employee.update = function(id, employee, result){
 dbConn.query("UPDATE employees SET first_name=?,last_name=?,email=?,phone=?,organization=?,designation=?,salary=? WHERE id = ?", [employee.first_name,employee.last_name,employee.email,employee.phone,employee.organization,employee.designation,employee.salary, id], function (err, res) {
 if(err) {
@@ -58,6 +66,8 @@ if(err) {
 }
 });
 };
+
+// delete employee
 Employee.delete = function(id, result){
 dbConn.query("DELETE FROM employees WHERE id = ?", [id], function (err, res) {
 if(err) {
@@ -69,4 +79,6 @@ else{
 }
 });
 };
+
+// make employee public available
 module.exports= Employee;
